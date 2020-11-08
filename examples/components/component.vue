@@ -9,7 +9,9 @@
              :color="color"
              :loader="loader"
              :background-color="bgColor">
-      <h3 v-if="useSlot">Loading ...</h3>
+      <template #default v-if="useSlot">
+        <h3>Loading ...</h3>
+      </template>
     </loading>
     <div class="card-body">
       <h5 class="card-title">Use as component</h5>

@@ -1,5 +1,5 @@
 <template>
-  <transition :name="transition">
+  <transition :name="transition" ref="root">
     <div tabindex="0"
          class="vld-overlay is-active"
          :class="{ 'is-full-page': isFullPage }"
@@ -77,6 +77,8 @@ export default {
       default: 'spinner'
     }
   },
+  // todo prop.sync is working?
+  emits: ['hide','update:active'],
   data() {
     return {
       // Don't mutate the prop
@@ -89,9 +91,9 @@ export default {
     if (this.programmatic) {
       if (this.container) {
         this.isFullPage = false;
-        this.container.appendChild(this.$el)
+        this.container.appendChild(this.$refs.root)
       } else {
-        document.body.appendChild(this.$el)
+        document.body.appendChild(this.$refs.root)
       }
     }
   },
@@ -124,8 +126,9 @@ export default {
       if (this.programmatic) {
         this.isActive = false;
         setTimeout(() => {
+          //todo not working vue 3
           this.$destroy();
-          removeElement(this.$el)
+          removeElement(this.$refs.root)
         }, 150)
       }
     },
@@ -170,7 +173,7 @@ export default {
       }
     }
   },
-  beforeDestroy() {
+  beforeUnmount() {
     document.removeEventListener('keyup', this.keyPress);
   },
 }

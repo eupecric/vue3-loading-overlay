@@ -8,6 +8,7 @@ const Api = (Vue, globalProps = {}, globalSlots = {}) => {
       };
       const propsData = Object.assign({}, globalProps, props, forceProps);
 
+      // todo this is not working in vue 3
       const instance = new (Vue.extend(Component))({
         el: document.createElement('div'),
         propsData

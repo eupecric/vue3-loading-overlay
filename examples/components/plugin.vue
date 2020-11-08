@@ -55,12 +55,6 @@
 </template>
 
 <script>
-  import Vue from 'vue';
-  // Import component
-  import Loading from '../../src/index';
-  // Init plugin
-  Vue.use(Loading);
-
   export default {
     data() {
       return {
