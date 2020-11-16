@@ -55,6 +55,8 @@
 </template>
 
 <script>
+import {h,resolveComponent} from 'vue';
+
   export default {
     data() {
       return {
@@ -69,26 +71,13 @@
         width: 64,
       }
     },
-    components: {
-      customSlot: {
-        props: {
-          color: {
-            type: String,
-            default: '#000'
-          }
-        },
-        template: `<div class="custom-slot" :style="{color:color}"><h3>Wait ...</h3></div>`
-      }
-    },
+    components: {},
     methods: {
       simulate() {
         let slots = this.useSlot ? {
-          // https://vuejs.org/v2/guide/render-function.html#createElement-Arguments
-          default: this.$createElement('custom-slot', {
-            props: {
-              color: '#005cbf'
-            }
-          })
+          default: h('h3', {
+            class:'custom-slot'
+          },'Please Wait ...')
         } : {};
 
         let loader = this.$loading.show({

@@ -1,6 +1,7 @@
 import Component from './Component.vue'
+import {mount} from './mount'
 
-const Api = (Vue, globalProps = {}, globalSlots = {}) => {
+const Api = (app, globalProps = {}, globalSlots = {}) => {
   return {
     show(props = globalProps, slots = globalSlots) {
       const forceProps = {
@@ -8,18 +9,14 @@ const Api = (Vue, globalProps = {}, globalSlots = {}) => {
       };
       const propsData = Object.assign({}, globalProps, props, forceProps);
 
-      // todo this is not working in vue 3
-      const instance = new (Vue.extend(Component))({
-        el: document.createElement('div'),
-        propsData
+      const {vNode, destroy, el} = mount(Component, {
+        props: propsData,
+        element: document.createElement('div'),
+        app,
+        children: slots
       });
 
-      const mergedSlots = Object.assign({}, globalSlots, slots);
-      Object.keys(mergedSlots).map((name) => {
-        instance.$slots[name] = mergedSlots[name]
-      });
-
-      return instance;
+      return vNode;
     }
   }
 };

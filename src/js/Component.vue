@@ -86,7 +86,7 @@ export default {
     }
   },
   components: Loaders,
-  beforeMount() {
+  mounted() {
     // Insert the component in DOM when called programmatically
     if (this.programmatic) {
       if (this.container) {
@@ -96,8 +96,7 @@ export default {
         document.body.appendChild(this.$refs.root)
       }
     }
-  },
-  mounted() {
+
     // Activate immediately when called programmatically
     if (this.programmatic) {
       this.isActive = true;
