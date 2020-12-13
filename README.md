@@ -15,10 +15,11 @@ Vue.js component for full screen loading indicator
 ## Installation
 ```bash
 # yarn
-yarn add vue-loading-overlay
+yarn add vue3-loading-overlay  // not valiable now.
 
 # npm
-npm install vue-loading-overlay 
+npm install vue3-loading-overlay // not valiable now
+
 ```
 
 ## Usage
@@ -26,7 +27,7 @@ npm install vue-loading-overlay
 ```html
 <template>
     <div class="vld-parent">
-        <loading :active.sync="isLoading" 
+        <loading :active="isLoading" 
         :can-cancel="true" 
         :on-cancel="onCancel"
         :is-full-page="fullPage"></loading>
@@ -43,26 +44,31 @@ npm install vue-loading-overlay
     import 'vue-loading-overlay/dist/vue-loading.css';
     
     export default {
-        data() {
-            return {
-                isLoading: false,
-                fullPage: true
-            }
+        setup() {
+          const isLoading = ref(false);
+          const fullPage = ref(true);
+          const doAjax=() => {
+                isLoading.value = true;
+                // simulate AJAX
+                setTimeout(() => {
+                  isLoading = false
+                },5000)
+            },
+          const onCancel= ()=> {
+              console.log('User cancelled the loader.');
+              //because the props is single flow direction, you need to set isLoading status normally.
+              isLoading.value = false;
+          }
+          return 
+          {
+            isLoading,
+            fullPage,
+            doAjax,
+            onCancel
+          }
         },
         components: {
             Loading
-        },
-        methods: {
-            doAjax() {
-                this.isLoading = true;
-                // simulate AJAX
-                setTimeout(() => {
-                  this.isLoading = false
-                },5000)
-            },
-            onCancel() {
-              console.log('User cancelled the loader.')
-            }
         }
     }
 </script>
@@ -79,37 +85,41 @@ npm install vue-loading-overlay
 </template>
 
 <script>
-    import Vue from 'vue';
-    // Import component
-    import Loading from 'vue-loading-overlay';
+    import { ref } from 'vue';
+    // Import the method.
+    import { useLoading } from 'vue3-loading-overlay';
     // Import stylesheet
-    import 'vue-loading-overlay/dist/vue-loading.css';
+    import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
     // Init plugin
-    Vue.use(Loading);
 
     export default {
-        data() {
-            return {
-                fullPage: false
-            }
-        },
-        methods: {
-            submit() {
-                let loader = this.$loading.show({
-                  // Optional parameters
-                  container: this.fullPage ? null : this.$refs.formContainer,
-                  canCancel: true,
-                  onCancel: this.onCancel,
-                });
+      setup() {
+        const fullPage = ref(true);
+        let formContainer = ref(null);
+
+        const submit = () => {
+          let loader = useLoading();
+          loader.show({
+            // Optional parameters
+            container: this.fullPage ? null : formContainer.value,
+            canCancel: true,
+            onCancel: onCancel,
+          });
                 // simulate AJAX
-                setTimeout(() => {
-                  loader.hide()
-                },5000)                 
-            },
-            onCancel() {
-              console.log('User cancelled the loader.')
-            }                      
+          setTimeout(() => {
+            loader.hide()
+          },5000)                 
+        };
+
+        const onCancel =() => {
+          console.log('User cancelled the loader.')
+        };   
+        return {
+          fullPage,
+          formContainer,
+          submit
         }
+      },
     }
 </script>
 ```
@@ -119,7 +129,7 @@ The component accepts these props:
 
 | Attribute        | Type                | Default              | Description      |
 | :---             | :---:               | :---:                | :---             |
-| active           | Boolean             | `false`              | Show loading by default when `true`, use the `.sync` modifier to make it two-way binding |
+| active           | Boolean             | `false`              | Show loading by default when `true` |
 | can-cancel       | Boolean             | `false`              | Allow user to cancel by pressing ESC or clicking outside |
 | on-cancel        | Function            | `()=>{}`             | Do something upon cancel, works in conjunction with `can-cancel`  |
 | is-full-page     | Boolean             | `true`               | When `false`; limit loader to its container^ |
@@ -149,7 +159,8 @@ The component accepts these slots:
 ## API methods
 ### `Vue.$loading.show(?propsData,?slots)`
 ```js
-let loader = Vue.$loading.show({
+let loader = useLoading();
+loader.show({
   // Pass props by their camelCased names
   container: this.$refs.loadingContainer,
   canCancel: true, // default false
@@ -162,7 +173,7 @@ let loader = Vue.$loading.show({
   opacity: 0.5,
   zIndex: 999,
 },{
-  // Pass slots by their names
+  // Pass slots by their names, not work now.
   default: this.$createElement('your-custom-loader-component-name'),
 });
 // hide loader whenever you want
@@ -170,6 +181,8 @@ loader.hide();
 ```
 
 ## Global configs
+## todo
+
 You can set props and slots for all future instances when using as plugin
 ```js
 Vue.use(Loading, {
@@ -188,20 +201,6 @@ let loader = Vue.$loading.show({
 });
 ```
 
-## Install in non-module environments (without webpack)
-```html
-<!-- Vue js -->
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6"></script>
-<!-- Lastly add this package -->
-<script src="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3"></script>
-<link href="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3/dist/vue-loading.css" rel="stylesheet">
-<!-- Init the plugin and component-->
-<script>
-Vue.use(VueLoading);
-Vue.component('loading', VueLoading)
-</script>
-```
-
 ### Browser support
 * Modern browsers only
 
@@ -213,9 +212,7 @@ Vue.component('loading', VueLoading)
 * This should open the demo page at `http://localhost:9000` in your default web browser 
 
 ## Testing
-* This package is using [Jest](https://github.com/facebook/jest) and [vue-test-utils](https://github.com/vuejs/vue-test-utils) for testing.
-* Tests can be found in `__test__` folder.
-* Execute tests with this command `yarn test`
+* Todo.
 
 ## License
 [MIT](LICENSE.txt) License

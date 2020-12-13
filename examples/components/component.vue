@@ -114,7 +114,7 @@
 
 <script lang="ts">
 import { reactive } from "vue";
-import Loading from "../../index";
+import Loading from "../../src/index";
 
 export default {
   setup() {

@@ -108,7 +108,7 @@ import {
   RendererOptions,
 } from "vue";
 // Import component
-import { useLoading } from "../../index";
+import { useLoading } from "../../src/index";
 
 const CustomSlot = defineComponent({
   template: `<div class="custom-slot" :style="{color:color}"><h3>Wait ...</h3></div>`,
