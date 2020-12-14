@@ -9,7 +9,7 @@
     <nav
       class="navbar navbar-expand-lg navbar navbar-dark bg-dark shadow-sm mb-3"
     >
-      <span class="navbar-brand mb-0">Vue.js Loading Overlay v3</span>
+      <span class="navbar-brand mb-0">Vue.js Loading Overlay for Vue3</span>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <a
@@ -57,10 +57,7 @@
     </main>
 
     <footer class="text-center text-muted small mb-3">
-      Created by
-      <a href="https://twitter.com/ankurk91" target="_blank" rel="noopener"
-        >@ankurk91</a
-      >
+      Forked from vue-loading-overlay
     </footer>
   </div>
 </template>
