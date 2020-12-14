@@ -1,10 +1,4 @@
 <template>
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
-    crossorigin="anonymous"
-  />
   <div>
     <nav
       class="navbar navbar-expand-lg navbar navbar-dark bg-dark shadow-sm mb-3"
@@ -14,7 +8,7 @@
         <li class="nav-item">
           <a
             class="nav-link"
-            href="https://github.com/ankurk91/vue-loading-overlay"
+            href="https://github.com/moyoujun/vue3-loading-overlay"
             target="_blank"
           >
             GitHub</a
@@ -37,7 +31,7 @@
               <ul>
                 <li>
                   <a
-                    href="https://github.com/ankurk91/vue-loading-overlay"
+                    href="https://github.com/moyoujun/vue3-loading-overlay"
                     target="_blank"
                     >GitHub</a
                   >
@@ -74,4 +68,3 @@ export default {
   },
 };
 </script>
-
