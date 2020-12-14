@@ -1,16 +1,14 @@
 # Vue Loading Overlay Component
 
-[![downloads](https://badgen.net/npm/dt/vue-loading-overlay)](http://npm-stats.com/~packages/vue-loading-overlay)
-[![jsdelivr](https://data.jsdelivr.com/v1/package/npm/vue-loading-overlay/badge?style=rounded)](https://www.jsdelivr.com/package/npm/vue-loading-overlay)
-[![npm-version](https://badgen.net/npm/v/vue-loading-overlay)](https://www.npmjs.com/package/vue-loading-overlay)
-[![github-tag](https://badgen.net/github/tag/ankurk91/vue-loading-overlay)](https://github.com/ankurk91/vue-loading-overlay/)
-[![build](https://github.com/ankurk91/vue-loading-overlay/workflows/build/badge.svg)](https://github.com/ankurk91/vue-loading-overlay/actions)
-[![license](https://badgen.net/github/license/ankurk91/vue-loading-overlay)](https://yarnpkg.com/en/package/vue-loading-overlay)
+[![downloads](https://badgen.net/npm/dt/vue-loading-overlay)](http://npm-stats.com/~packages/vue3-loading-overlay)
+[![jsdelivr](https://data.jsdelivr.com/v1/package/npm/vue3-loading-overlay/badge?style=rounded)](https://www.jsdelivr.com/package/npm/vue3-loading-overlay)
+[![npm-version](https://badgen.net/npm/v/vue3-loading-overlay)](https://www.npmjs.com/package/vue3-loading-overlay)
+[![github-tag](https://badgen.net/github/tag/ankurk91/vue-loading-overlay)](https://github.com/moyoujun/vue3-loading-overlay/)
 ![ts](https://badgen.net/badge/ready/TypeScript/blue)
 
 Vue.js component for full screen loading indicator
 
-## [Demo](https://ankurk91.github.io/vue-loading-overlay/) or [JSFiddle](https://jsfiddle.net/ankurk91/w8y8k5wo/)
+## [Demo](https://moyoujun.github.io/vue3-loading-overlay/)
 
 ## Installation
 ```bash
@@ -18,7 +16,7 @@ Vue.js component for full screen loading indicator
 yarn add vue3-loading-overlay  // not valiable now.
 
 # npm
-npm install vue3-loading-overlay // not valiable now
+npm install vue3-loading-overlay
 
 ```
 
