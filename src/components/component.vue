@@ -1,7 +1,22 @@
 <template>
-  <div class="card vld-parent mb-3" ref="formContainer">
+  <div class="card vld-parent mb-3">
+    <loading
+      :active="viewmodel.isLoading"
+      :can-cancel="viewmodel.canCancel"
+      :on-cancel="viewmodel.whenCancelled"
+      :is-full-page="viewmodel.fullPage"
+      :height="viewmodel.height"
+      :width="viewmodel.width"
+      :color="viewmodel.color"
+      :loader="viewmodel.loader"
+      :background-color="viewmodel.bgColor"
+    >
+      <template v-if="viewmodel.useSlot" v-slot:default
+        ><h3>Loading ...</h3></template
+      >
+    </loading>
     <div class="card-body">
-      <h5 class="card-title">Use as plugin</h5>
+      <h5 class="card-title">Use as component</h5>
 
       <div class="form-group m-0">
         <label>Loader shape</label>
@@ -19,10 +34,10 @@
         <input
           type="checkbox"
           class="custom-control-input"
-          id="input-full-page-2"
+          id="input-full-page-1"
           v-model="viewmodel.fullPage"
         />
-        <label class="custom-control-label" for="input-full-page-2"
+        <label class="custom-control-label" for="input-full-page-1"
           >Full page?</label
         >
       </div>
@@ -31,10 +46,10 @@
         <input
           type="checkbox"
           class="custom-control-input"
-          id="input-cancel-2"
+          id="input-cancel-1"
           v-model="viewmodel.canCancel"
         />
-        <label class="custom-control-label" for="input-cancel-2"
+        <label class="custom-control-label" for="input-cancel-1"
           >User can cancel?</label
         >
       </div>
@@ -43,10 +58,10 @@
         <input
           type="checkbox"
           class="custom-control-input"
-          id="input-slot-2"
+          id="input-slot-1"
           v-model="viewmodel.useSlot"
         />
-        <label class="custom-control-label" for="input-slot-2"
+        <label class="custom-control-label" for="input-slot-1"
           >Use slot? (replace shape)</label
         >
       </div>
@@ -97,81 +112,46 @@
   </div>
 </template>
 
-<script lang= "ts">
-import {
-  reactive,
-  ref,
-  h,
-  defineComponent,
-  createSlots,
-  renderSlot,
-  RendererOptions,
-} from "vue";
-// Import component
-import { useLoading } from "../../src/index";
-
-const CustomSlot = defineComponent({
-  template: `<div class="custom-slot" :style="{color:color}"><h3>Wait ...</h3></div>`,
-});
-
+<script lang="ts">
+import { reactive } from "vue";
+import Loading from "../../packages/vue3-loading-overlay";
 export default {
   setup() {
-    const formContainer = ref<any>(null);
-
     const viewmodel = reactive({
+      isLoading: false,
       fullPage: true,
       canCancel: true,
       useSlot: false,
-      loader: "dots",
-      timeout: 3000, //ms
-      color: "#00ab00",
-      bgColor: "#4b4b4b",
-      height: 64,
-      width: 64,
+      loader: "spinner",
+      color: "#007bff",
+      bgColor: "#ffffff",
+      height: 128,
+      width: 128,
+      timeout: 3000,
     });
-    const whenCancelled = () => {
-      console.log("User cancelled the loader.");
-    };
-
     const simulate = () => {
-      let slots = viewmodel.useSlot
-        ? {
-            // https://vuejs.org/v2/guide/render-function.html#createElement-Arguments
-            default: (props: any) => h(CustomSlot, props),
-          }
-        : {};
-
-      let loader = useLoading();
-      loader.show(
-        {
-          container: viewmodel.fullPage ? null : formContainer.value,
-          canCancel: viewmodel.canCancel,
-          onCancel: whenCancelled,
-          color: viewmodel.color,
-          backgroundColor: viewmodel.bgColor,
-          height: viewmodel.height,
-          width: viewmodel.width,
-          loader: viewmodel.loader,
-          opacity: 0.3,
-        },
-        slots
-      );
-
-      // simulate async call
+      viewmodel.isLoading = true;
+      // Simulate async call
       setTimeout(() => {
-        loader.hide();
+        viewmodel.isLoading = false;
       }, viewmodel.timeout);
     };
-
+    const whenCancelled = () => {
+      console.log("User cancelled the loader.");
+      viewmodel.isLoading = false;
+    };
     return {
       viewmodel,
       simulate,
-      formContainer,
+      whenCancelled,
     };
   },
   components: {
-    CustomSlot,
+    Loading,
+  },
+  methods: {
+    simulate() {},
+    whenCancelled() {},
   },
 };
 </script>
-

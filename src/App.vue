@@ -9,12 +9,12 @@
     <nav
       class="navbar navbar-expand-lg navbar navbar-dark bg-dark shadow-sm mb-3"
     >
-      <span class="navbar-brand mb-0">Vue.js Loading Overlay for Vue3</span>
+      <span class="navbar-brand mb-0 p-3">Vue.js Loading Overlay for Vue3</span>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <a
             class="nav-link"
-            href="https://github.com/ankurk91/vue-loading-overlay"
+            href="https://github.com/moyoujun/vue3-loading-overlay"
             target="_blank"
           >
             GitHub</a
@@ -37,14 +37,14 @@
               <ul>
                 <li>
                   <a
-                    href="https://github.com/ankurk91/vue-loading-overlay"
+                    href="https://github.com/moyoujun/vue3-loading-overlay"
                     target="_blank"
                     >GitHub</a
                   >
                 </li>
                 <li>
                   <a
-                    href="https://www.npmjs.com/package/vue-loading-overlay"
+                    href="https://www.npmjs.com/package/vue3-loading-overlay"
                     target="_blank"
                     >npm</a
                   >
@@ -65,7 +65,6 @@
 <script lang="ts">
 import ComponentExample from "./components/component.vue";
 import PluginExample from "./components/plugin.vue";
-
 export default {
   name: "app",
   components: {
@@ -74,4 +73,3 @@ export default {
   },
 };
 </script>
-
